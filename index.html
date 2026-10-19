@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+  <title>The Living Cursor - Combat Arena</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+</head>
+<body>
+  <!-- Pre-Game Login Modal -->
+  <div id="loginOverlay" class="overlay">
+    <div class="card">
+      <h2 class="neon-title">THE LIVING CURSOR</h2>
+      <div class="guide-box">
+        <p>⚔️ <b>Head Collision:</b> Ram enemies head-on to deal kinetic damage</p>
+        <p>⚡ <b>Laser Beam:</b> Left Click / Tap Screen / FIRE button to shoot</p>
+        <p>💬 <b>World Chat:</b> Press Enter to broadcast chat message</p>
+      </div>
+      <input type="text" id="usernameInput" placeholder="ENTER CALLSIGN..." maxlength="12" autofocus />
+      <button id="startBtn">ENGAGE</button>
+    </div>
+  </div>
+
+  <!-- Game Over / Elimination Modal -->
+  <div id="gameOverOverlay" class="overlay" style="display: none;">
+    <div class="card game-over-card">
+      <h2 class="game-over-title">SYSTEM FAILURE</h2>
+      <div class="defeat-banner">
+        <span class="defeat-sub">YOU WERE ELIMINATED BY</span>
+        <span id="killerNameDisplay" class="killer-name">UNKNOWN</span>
+      </div>
+      <div class="game-over-stats">
+        <div class="stat-item">
+          <span class="stat-label">FINAL SCORE</span>
+          <span id="finalScoreDisplay" class="stat-value">0</span>
+        </div>
+      </div>
+      <button id="respawnBtn">RESPAWN</button>
+    </div>
+  </div>
+
+  <!-- HUD: Score & HP -->
+  <div id="hud" style="display: none;">
+    <div class="hud-panel">
+      <div class="hud-top">
+        <span id="myUsernameDisplay">PILOT</span>
+        <span id="myScoreDisplay">SCORE 0</span>
+      </div>
+      <div class="hp-status">
+        <div class="hp-bar-track">
+          <div id="myHpBar" class="hp-bar-fill"></div>
+        </div>
+        <span id="hpText">100%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Right Online Status Panel -->
+  <div id="onlineStatusPanel">
+    <span class="online-dot"></span>
+    <span id="onlineCountText">1 ONLINE</span>
+  </div>
+
+  <!-- World Chat Box -->
+  <div id="chatContainer" style="display: none;">
+    <div id="chatMessages"></div>
+    <form id="chatForm">
+      <input type="text" id="chatInput" placeholder="Press Enter to chat..." maxlength="80" autocomplete="off" />
+    </form>
+  </div>
+
+  <canvas id="gameCanvas"></canvas>
+  <script src="main.js"></script>
+</body>
+</html>
